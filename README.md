@@ -110,6 +110,12 @@ Report suspected vulnerabilities privately as described in
 [SECURITY.md](SECURITY.md). Never include credentials, private account data, or
 exploit details in a public issue.
 
+## Related public projects
+
+- [Coding Agent Guidelines](https://github.com/ashishkaloge/coding-agent-guidelines) - Reusable rules for coding agents working in real repositories.
+- [Production Launch Prompts](https://github.com/ashishkaloge/production-launch-prompts) - Review prompts and scorecards for checking software before launch.
+- [Awesome AI Coding Agent Engineering](https://github.com/ashishkaloge/awesome-agentic-engineering) - A reviewed guide to coding-agent tools, workflows, verification, and security.
+
 ## License
 
 The repository source is available under the [MIT License](LICENSE). The license
