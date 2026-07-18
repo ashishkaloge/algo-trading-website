@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Security | Tradign</title>
+    <meta
+      name="description"
+      content="Keys, custody, approvals and encryption, how Tradign protects your money."
+    />
+    <link rel="canonical" href="https://tradign.com/platform/security/" />
+    <meta property="og:title" content="Security | Tradign" />
+    <meta property="og:description" content="Keys, custody, approvals and encryption, how Tradign protects your money." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://tradign.com/platform/security/" />
+    <meta property="og:image" content="https://tradign.com/_landing/assets/og-cover.png" />
+    <meta property="og:image:width" content="2991" />
+    <meta property="og:image:height" content="1682" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Security | Tradign" />
+    <meta name="twitter:description" content="Keys, custody, approvals and encryption, how Tradign protects your money." />
+    <meta name="twitter:image" content="https://tradign.com/_landing/assets/og-cover.png" />
+    <meta
+      name="theme-color"
+      content="#000000"
+      media="(prefers-color-scheme: dark)"
+    />
+    <meta
+      name="theme-color"
+      content="#ffffff"
+      media="(prefers-color-scheme: light)"
+    />
+    <link rel="icon" href="../../_landing/assets/favicon.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      href="../../_landing/assets/fonts/inter-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="../../_landing/assets/fonts/plus-jakarta-sans-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../../_landing/styles/tokens.css?v=35" />
+    <link rel="stylesheet" href="../../_landing/styles/reset.css?v=29" />
+    <link rel="stylesheet" href="../../_landing/styles/primitives.css?v=23" />
+    <link rel="stylesheet" href="../../_landing/styles/components.css?v=65" />
+    <link rel="stylesheet" href="../../_landing/styles/pages.css?v=14" />
+  </head>
+  <body>
+    <header class="header" data-site-header></header>
+
+    <section class="site-frame">
+      <main>
+        <section class="pg-hero pg-hero--center container">
+          <span class="pg-eyebrow">Platform &middot; Security</span>
+          <h1 class="pg-title">Your keys. Your call. Your money.</h1>
+          <p class="pg-lede">
+            Tradign is non-custodial by design: it can place and manage orders
+            through permissions you grant, and it can never move money out. This
+            is the entire model, in one card.
+          </p>
+        </section>
+        <section class="pg-section container">
+          <div class="px-permit">
+            <div class="px-permit-head">
+              <h3>API key &middot; your exchange</h3>
+              <span>created by you</span>
+            </div>
+            <div class="px-permit-row">
+              <span>Read market data</span
+              ><span class="tv-toggle tv-toggle--on" aria-hidden="true"></span>
+            </div>
+            <div class="px-permit-row">
+              <span>Place &amp; manage orders</span
+              ><span class="tv-toggle tv-toggle--on" aria-hidden="true"></span>
+            </div>
+            <div class="px-permit-row">
+              <span>Withdrawals</span
+              ><span class="px-permit-lock">Locked at the exchange</span>
+            </div>
+            <p class="px-permit-note">
+              The withdrawal permission is disabled where the key is created
+              because Tradign never asks for it and could not use it.
+            </p>
+          </div>
+        </section>
+        <section class="pg-section container">
+          <div class="pg-section-head">
+            <h2 class="pg-h2">The ledger</h2>
+            <p class="pg-sub">
+              Both sides of the permission line, spelled out.
+            </p>
+          </div>
+          <div class="px-ledger">
+            <div class="px-ledger-col">
+              <h3><span>&#10003;</span>What Tradign can do</h3>
+              <div class="px-ledger-item">
+                <span
+                  >Read market data and account balances for dashboards</span
+                >
+              </div>
+              <div class="px-ledger-item">
+                <span
+                  >Place and manage orders on venues
+                  <strong>you connected</strong></span
+                >
+              </div>
+              <div class="px-ledger-item">
+                <span
+                  >Execute Hyperliquid trades through scoped signer authority;
+                  prepare GMX transactions for your wallet to review and
+                  sign</span
+                >
+              </div>
+              <div class="px-ledger-item">
+                <span
+                  >Pause, resume or stop strategies instantly, on your
+                  command</span
+                >
+              </div>
+            </div>
+            <div class="px-ledger-col px-ledger-col--never">
+              <h3><span>&#10007;</span>What it can never do</h3>
+              <div class="px-ledger-item">
+                <span
+                  >Withdraw or transfer funds. The permission does not
+                  exist</span
+                >
+              </div>
+              <div class="px-ledger-item">
+                <span
+                  >Request your primary-wallet private key, seed phrase or
+                  recovery phrase</span
+                >
+              </div>
+              <div class="px-ledger-item">
+                <span
+                  >Echo a stored secret back. Keys are encrypted server-side,
+                  never shown in chat</span
+                >
+              </div>
+              <div class="px-ledger-item">
+                <span
+                  >Keep access you revoked. Released keys stop strategies
+                  safely</span
+                >
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="pg-section container">
+          <div class="pg-section-head">
+            <h2 class="pg-h2">How secrets live here</h2>
+          </div>
+          <div class="px-defense">
+            <div class="px-layer">
+              <span class="px-layer-no">01</span>
+              <div>
+                <h3>Encrypted server-side</h3>
+                <p>
+                  API keys and provider secrets are encrypted at rest, never
+                  rendered in the UI again, and never shared in chat.
+                </p>
+              </div>
+            </div>
+            <div class="px-layer">
+              <span class="px-layer-no">02</span>
+              <div>
+                <h3>Paper before capital</h3>
+                <p>
+                  Every strategy can run against live markets with zero
+                  permissions and zero capital before you connect anything real.
+                </p>
+              </div>
+            </div>
+            <div class="px-layer">
+              <span class="px-layer-no">03</span>
+              <div>
+                <h3>Approval before entry</h3>
+                <p>
+                  In Approval mode every entry waits for your one-tap
+                  confirmation on Telegram or email. Skip it and nothing
+                  happens.
+                </p>
+              </div>
+            </div>
+            <div class="px-layer">
+              <span class="px-layer-no">04</span>
+              <div>
+                <h3>Revoke in one click</h3>
+                <p>
+                  Releasing credentials blocks new entries. Existing exposure
+                  remains tracked and requires reconciliation until it is flat.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="pg-cta container">
+          <h2>Read the fine print too.</h2>
+          <p>
+            The privacy policy and risk disclosure carry the complete legal
+            detail.
+          </p>
+          <div class="cluster">
+            <a
+              href="https://tradign.com/ai"
+              class="button button-light"
+              target="_blank"
+              rel="noopener"
+              >Start building</a
+            ><a
+              href="https://tradign.com/help"
+              class="button button-dark"
+              target="_blank"
+              rel="noopener"
+              >Contact</a
+            >
+          </div>
+        </section>
+      </main>
+      <footer class="footer" data-site-footer></footer>
+    </section>
+
+    <script src="../../_landing/js/site.js?v=5"></script>
+    <script src="../../_landing/js/script.js?v=38"></script>
+  </body>
+</html>

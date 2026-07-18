@@ -1,0 +1,1639 @@
+/* Shared site shell, header/footer, and homepage components. */
+
+.site-frame {
+  display: flex;
+  flex: 1 1 0;
+  min-height: 0;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--sp-7);
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+.site-frame > main {
+  flex: 1 0 auto;
+}
+
+.site-frame::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.site-frame::-webkit-scrollbar-thumb {
+  border-radius: var(--br-7);
+  background: var(--border-strong);
+}
+
+.site-frame::-webkit-scrollbar-thumb:hover {
+  background: var(--text-3);
+}
+
+.site-frame::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-frame {
+    scroll-behavior: auto;
+  }
+}
+
+/* Background texture: soft depth glow + fine film grain over the near-black base. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    1100px 640px at 50% -12%,
+    var(--glow),
+    transparent 62%
+  );
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Header */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  flex: 0 0 var(--header-h);
+  height: var(--header-h);
+  border-bottom: var(--bw-1) solid var(--border);
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.logo {
+  font-size: 1.06rem;
+  font-weight: var(--fw-6);
+  letter-spacing: 0;
+}
+
+.logo-tld {
+  color: var(--text-2);
+  font-weight: 400;
+}
+
+/* Hero */
+.solutions {
+  display: flex;
+  min-height: calc(100svh - var(--header-h));
+  flex-direction: column;
+}
+
+.sol-inner {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: calc(100svh - var(--header-h));
+  padding-top: clamp(28px, 5vh, 64px);
+  padding-bottom: 24px;
+}
+
+.sol-heading {
+  color: var(--text);
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5.4vw, 5.8rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.04;
+  white-space: nowrap;
+}
+
+.sol-heading .l1,
+.sol-heading .l2 {
+  display: block;
+}
+
+.sol-heading .l2 {
+  padding-left: 20%;
+}
+
+.sol-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  margin-top: clamp(28px, 4.5vh, 60px);
+}
+
+.sol-illust {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.sol-illust .chart {
+  width: min(100%, 620px);
+  height: clamp(190px, 30vh, 320px);
+}
+
+.sol-aside {
+  max-width: 420px;
+}
+
+.ai-tag {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 18px;
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.sol-sub {
+  margin-bottom: 28px;
+  color: var(--text-2);
+  font-size: clamp(0.94rem, 1.12vw, 1.08rem);
+  font-weight: var(--fw-6);
+  line-height: 1.65;
+}
+
+.founder-note {
+  margin: -8px 0 26px;
+  max-width: 390px;
+  padding-left: 14px;
+  border-left: 1px solid var(--border-strong);
+  color: var(--text-3);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+/* Chart wrapper carries a small product-tied tag so the live candles read as
+   "your strategy reading the market", not a generic ticker. */
+.sol-chart {
+  position: relative;
+  width: min(100%, 620px);
+}
+
+.strategy-overlay {
+  pointer-events: none;
+}
+
+.strategy-zone {
+  fill: rgba(var(--success-rgb), 0.05);
+  stroke: rgba(var(--success-rgb), 0.12);
+  stroke-width: 1;
+}
+
+.strategy-level {
+  stroke-width: 1.5;
+  stroke-dasharray: 5 5;
+}
+
+.strategy-level--tp {
+  stroke: var(--success);
+}
+
+.strategy-level--entry {
+  stroke: var(--accent);
+  stroke-dasharray: 0;
+}
+
+.strategy-level--sl {
+  stroke: var(--error);
+}
+
+.strategy-entry-ring {
+  fill: rgba(var(--accent-rgb), 0.1);
+  stroke: var(--accent);
+  stroke-width: 1.5;
+}
+
+.strategy-entry-dot {
+  fill: var(--accent);
+}
+
+.strategy-label rect,
+.strategy-long rect {
+  fill: var(--bg);
+  stroke: var(--border-strong);
+  stroke-width: 1;
+}
+
+.strategy-label text,
+.strategy-long text {
+  fill: var(--text);
+  font-family: var(--font);
+  font-size: 8.5px;
+  font-weight: var(--fw-7);
+  letter-spacing: 0;
+}
+
+.strategy-label--tp text {
+  fill: var(--success);
+}
+
+.strategy-label--sl text {
+  fill: var(--error);
+}
+
+/* Above-the-fold credibility strip: real venues in muted wordmarks, so the
+   hero leads with "this actually runs" before the reader scrolls. CEX and Web3
+   venues share one type size, split by a thin divider. */
+.sol-trust {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+  margin-top: auto;
+  padding-top: 28px;
+}
+
+.sol-trust-label {
+  color: var(--text-3);
+  font-size: 0.72rem;
+  font-weight: var(--fw-6);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.sol-trust-venues {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 18px;
+  list-style: none;
+}
+
+.sol-trust-venues li {
+  color: var(--text-2);
+  font-family: var(--font-heading);
+  font-size: 0.98rem;
+  font-weight: var(--fw-6);
+  letter-spacing: -0.01em;
+}
+
+.sol-trust-divider {
+  width: 1px;
+  height: 16px;
+  padding: 0;
+  background: var(--border-strong);
+}
+
+/* Gated venue (dYdX): listed for completeness, visibly not live yet. */
+.sol-trust-gated {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-3);
+}
+
+.sol-trust-gated span {
+  padding: 1px 7px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text-3);
+  font-family: var(--font);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Live candlestick chart */
+.chart {
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000000 6%,
+    #000000 94%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000000 6%,
+    #000000 94%,
+    transparent
+  );
+}
+
+.candles {
+  will-change: transform;
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .sol-bottom {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 16px 0 40px;
+  }
+
+  .sol-illust {
+    justify-content: center;
+  }
+
+  .sol-illust .chart {
+    width: min(100%, 340px);
+    height: clamp(120px, 17vh, 175px);
+  }
+
+  .sol-aside {
+    max-width: none;
+  }
+
+  .sol-heading .l2 {
+    padding-left: 10%;
+  }
+}
+
+@media (max-width: 600px) {
+  .sol-bottom {
+    gap: 16px;
+    padding: 8px 0 28px;
+  }
+
+  .sol-illust .chart {
+    width: min(100%, 280px);
+    height: 128px;
+  }
+
+  .sol-cta {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .sol-cta .button {
+    width: 100%;
+  }
+
+  .sol-heading {
+    font-size: clamp(1.55rem, 6.4vw, 2rem);
+    white-space: normal;
+  }
+
+  /* Balance the wrapped lines so a lone word never orphans ("...builds / it.") */
+  .sol-heading .l1,
+  .sol-heading .l2 {
+    text-wrap: balance;
+  }
+
+  .sol-heading .l2 {
+    padding-left: 0;
+  }
+
+  .ai-tag {
+    margin-bottom: 12px;
+  }
+
+  .sol-sub {
+    margin-bottom: 18px;
+    font-size: 0.94rem;
+    font-weight: var(--fw-6);
+    line-height: 1.55;
+  }
+
+  .founder-note {
+    margin: 0 0 20px;
+  }
+}
+
+/* Section heading (shared) */
+.sec-head {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.sec-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--accent);
+  font-size: 0.95rem;
+  font-weight: var(--fw-7);
+  letter-spacing: 0.02em;
+}
+
+.sec-title {
+  margin-top: 10px;
+  color: var(--text);
+  font-family: var(--font-heading);
+  font-size: clamp(1.7rem, 3.6vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+/* Comparison benchmark (viewport 2) */
+.compare {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  padding: 90px 0;
+}
+
+.cmp-shell {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Right-edge fade on small screens: hints that the table scrolls sideways. */
+.cmp-shell::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 44px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, var(--fade));
+  opacity: 0;
+}
+
+@media (max-width: 960px) {
+  .cmp-shell::after {
+    opacity: 1;
+  }
+
+  /* Keep row labels readable while the table scrolls sideways. */
+  .cmp thead th:first-child,
+  .cmp .cmp-feat {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background: var(--bg);
+  }
+}
+
+.cmp {
+  overflow-x: auto;
+  /* The soft right-edge fade already hints at sideways scroll; hide the bar. */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.cmp::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+.cmp-note {
+  max-width: 1000px;
+  margin: 14px auto 0;
+  color: var(--text-3);
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.cmp table {
+  width: 100%;
+  min-width: 820px;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.cmp th,
+.cmp td {
+  padding: 15px 18px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.86rem;
+  white-space: nowrap;
+}
+
+.cmp thead th {
+  color: var(--text-2);
+  font-weight: 600;
+}
+
+.cmp tbody td {
+  color: var(--text-2);
+}
+
+.cmp thead th:first-child,
+.cmp .cmp-feat {
+  text-align: left;
+  color: var(--text);
+  font-weight: 500;
+  white-space: normal;
+}
+
+.cmp .cmp-feat small,
+.cmp .col-us small {
+  display: block;
+  margin-top: 4px;
+  color: var(--text-3);
+  font-size: 0.68rem;
+  font-weight: 400;
+  white-space: normal;
+}
+
+.cmp .yes {
+  color: var(--accent);
+  font-weight: 600;
+}
+.cmp .no {
+  color: var(--text-3);
+}
+
+/* focal column: a neutral elevated card with a thin, softly rounded outline.
+   Color is reserved entirely for actual row winners (below), so a
+   non-winning cell here reads as empty, same as any other cell. */
+.cmp .col-us {
+  background: var(--surface);
+  border-left: 1px solid var(--border-strong);
+  border-right: 1px solid var(--border-strong);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.cmp thead th.col-us {
+  color: var(--accent);
+  font-size: 1.02rem;
+  border-top: 1px solid var(--border-strong);
+  border-top-left-radius: var(--br-2);
+  border-top-right-radius: var(--br-2);
+}
+
+.cmp tbody tr:last-child td.col-us {
+  border-bottom: 1px solid var(--border-strong);
+  border-bottom-left-radius: var(--br-2);
+  border-bottom-right-radius: var(--br-2);
+}
+
+.cmp td.col-us .yes {
+  color: var(--text);
+}
+
+/* row winners: a neutral lift, identical in every column including col-us.
+   --lift is the product's bg-4/hover step: one step above --surface-2, so it
+   reads as distinct even nested inside the already-lifted col-us card. */
+.cmp .win {
+  font-weight: 700;
+  color: var(--text);
+  background: var(--lift);
+}
+
+.cmp-foot td {
+  padding-top: 18px;
+  border-top: 1.5px solid var(--border-strong);
+  color: var(--text);
+  font-weight: 600;
+}
+.cmp-foot td.col-us.win {
+  background: var(--lift);
+  color: var(--accent);
+  font-size: 1.1rem;
+}
+
+/* Pricing, explained: the reasoning behind each price. Four boxless columns
+   split only by vertical hairlines — price on top, the "why" as the body,
+   plan name and limit pinned at the bottom like an attribution. */
+.pwhy {
+  padding: 90px 0;
+}
+
+.pwhy-lede {
+  max-width: 560px;
+  margin: 16px auto 0;
+  color: var(--text-2);
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.pwhy-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.pwhy-col {
+  display: flex;
+  flex-direction: column;
+  min-height: 350px;
+  padding: 14px 32px 8px;
+  border-left: 1px solid var(--border);
+}
+
+.pwhy-col:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.pwhy-col:last-child {
+  padding-right: 0;
+}
+
+.pwhy-price {
+  color: var(--text);
+  font-family: var(--font-heading);
+  font-size: 2.3rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.pwhy-reason {
+  margin: 22px 0 30px;
+  color: var(--text-2);
+  font-size: 0.96rem;
+  line-height: 1.7;
+}
+
+.pwhy-for {
+  margin-top: auto;
+  padding-bottom: 12px;
+  color: var(--text-2);
+  font-size: 0.85rem;
+  line-height: 1.55;
+  font-weight: var(--fw-6);
+}
+
+.pwhy-who {
+  color: var(--text-3);
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.pwhy-note {
+  max-width: 1100px;
+  margin: 44px auto 0;
+  color: var(--text-3);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.pwhy-note a {
+  color: var(--text-2);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.pwhy-note a:hover {
+  color: var(--text);
+}
+
+@media (max-width: 960px) {
+  .pwhy-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 34px 0;
+  }
+
+  .pwhy-col:nth-child(odd) {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .pwhy-col:nth-child(even) {
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .pwhy-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .pwhy-col {
+    padding: 24px 0;
+    border-left: 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .pwhy-col:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+}
+
+/* Trust (viewport 4): safeguard carousel. One rounded panel, title on the
+   left; each safeguard gets a visual + copy on the right with a counter and
+   prev/next arrows below (careers-page pattern). Ghost styling on purpose:
+   the panel is the only box. Visuals float on a soft accent wash, chips are
+   tinted fills, and the single hairline above the nav is the only line.
+   Driven by script.js; auto-advances gently until the reader takes over. */
+.trust {
+  padding: 110px 0;
+}
+
+.tcar {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.9fr) 1.6fr;
+  gap: clamp(40px, 5vw, 72px);
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: clamp(36px, 5vw, 64px);
+  border-radius: 28px;
+  background: var(--surface);
+}
+
+.tcar-title {
+  margin-top: 12px;
+  color: var(--text);
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 2.6vw, 2.3rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+}
+
+.tcar-sub {
+  margin-top: 14px;
+  color: var(--text-3);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.tcar-body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.tcar-slides {
+  position: relative;
+  flex: 1;
+}
+
+.tcar-slide {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: minmax(200px, 280px) 1fr;
+  gap: clamp(28px, 4vw, 56px);
+  align-items: center;
+  opacity: 0;
+  transform: translateX(24px);
+  visibility: hidden;
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease,
+    visibility 0s linear 0.4s;
+}
+
+.tcar-slide--left {
+  transform: translateX(-24px);
+}
+
+.tcar-slide--active {
+  position: relative;
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+/* Left of each slide: a quiet neutral block one step above the panel */
+.tcar-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+  border-radius: 22px;
+  background: var(--surface-2);
+  padding: 32px;
+}
+
+.tcar-copy h3 {
+  color: var(--text);
+  font-family: var(--font-heading);
+  font-size: 1.18rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.tcar-copy p {
+  margin-top: 10px;
+  color: var(--text-2);
+  font-size: 0.94rem;
+  line-height: 1.7;
+}
+
+/* Counter + arrows, separated by the section's single hairline */
+.tcar-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.tcar-count {
+  color: var(--text-3);
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.tcar-count strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.tcar-arrows {
+  display: flex;
+  gap: 8px;
+}
+
+.tcar-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: var(--br-7);
+  background: var(--surface-2);
+  color: var(--text-2);
+  cursor: pointer;
+  transition:
+    background var(--tr-2),
+    color var(--tr-2);
+}
+
+.tcar-arrow:hover {
+  background: var(--lift);
+  color: var(--text);
+}
+
+.tcar-arrow svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Mini product visuals: no inner boxes, content floats on the wash */
+.tv-card {
+  display: flex;
+  width: 100%;
+  max-width: 210px;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.tv-card--center {
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.tv-title {
+  color: var(--text-3);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.tv-perm-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--text-2);
+  font-size: 0.82rem;
+}
+
+.tv-toggle {
+  position: relative;
+  width: 30px;
+  height: 17px;
+  border-radius: 999px;
+  background: var(--lift);
+}
+
+.tv-toggle::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--text-3);
+}
+
+.tv-toggle--on {
+  background: rgba(var(--accent-rgb), 0.3);
+}
+
+.tv-toggle--on::after {
+  left: auto;
+  right: 3px;
+  background: var(--accent);
+}
+
+.tv-lockchip {
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(var(--error-rgb), 0.12);
+  color: var(--error);
+  font-size: 0.68rem;
+  font-weight: 600;
+}
+
+.tv-appr-line {
+  color: var(--text);
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.tv-appr-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.tv-chip {
+  padding: 5px 13px;
+  border-radius: 999px;
+  background: var(--lift);
+  color: var(--text-2);
+  font-size: 0.74rem;
+  font-weight: 600;
+}
+
+.tv-chip--ok {
+  background: rgba(var(--success-rgb), 0.14);
+  color: var(--success);
+}
+
+.tv-chip--accent {
+  background: rgba(var(--accent-rgb), 0.14);
+  color: var(--accent);
+}
+
+.tv-metrics {
+  display: grid;
+  width: 100%;
+  max-width: 210px;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px 18px;
+}
+
+.tv-metric span {
+  color: var(--text-3);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.tv-metric strong {
+  display: block;
+  margin-top: 4px;
+  color: var(--text);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.tv-paper-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.tv-paper-cap {
+  color: var(--text-3);
+  font-size: 0.7rem;
+}
+
+.tv-curve {
+  width: 100%;
+  height: 56px;
+}
+
+.tv-curve polyline {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.tv-note {
+  color: var(--text-3);
+  font-size: 0.76rem;
+  line-height: 1.55;
+}
+
+.tv-icon {
+  display: inline-flex;
+  padding: 14px;
+  border-radius: 50%;
+  background: rgba(var(--accent-rgb), 0.12);
+  color: var(--accent);
+}
+
+.tv-icon svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (max-width: 960px) {
+  .tcar {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  /* Head stacks above the body, but the slide keeps visual + copy side by side
+     so the panel never leaves a large empty half at tablet widths. */
+  .tcar-slide {
+    grid-template-columns: minmax(0, 230px) 1fr;
+    gap: clamp(24px, 4vw, 40px);
+    align-items: center;
+  }
+}
+
+@media (max-width: 620px) {
+  .tcar-slide {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+
+  .tcar-visual {
+    max-width: 300px;
+  }
+}
+
+/* FAQ rows use native details controls, so the toggle works without custom
+   JavaScript and preserves built-in keyboard behavior. */
+.faq {
+  padding: 120px 0 140px;
+}
+
+.faq-list {
+  max-width: 780px;
+  margin: 0 auto;
+  border-top: 1px solid var(--border);
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--border);
+}
+
+.faq-q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 4px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.faq-q::-webkit-details-marker {
+  display: none;
+}
+
+.faq-q-title {
+  color: var(--text-2);
+  font-size: 1.02rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.faq-q:hover .faq-q-title {
+  color: var(--text);
+}
+
+.faq-q-icon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: var(--text-3);
+  transition:
+    transform 0.25s ease,
+    color 0.2s ease;
+}
+
+.faq-q-icon svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+.faq-item[open] .faq-q-title {
+  color: var(--text);
+}
+
+.faq-item[open] .faq-q-icon {
+  transform: rotate(45deg);
+  color: var(--text);
+}
+
+.faq-a {
+  max-width: 640px;
+  padding: 0 4px 24px;
+  color: var(--text-2);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  animation: faq-slide-down 0.2s ease-out;
+}
+
+@keyframes faq-slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Closing CTA under the FAQ (footer comes later) */
+.faq-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin-top: 72px;
+  text-align: center;
+}
+
+.faq-cta-line {
+  color: var(--text);
+  font-family: var(--font-heading);
+  font-size: clamp(1.3rem, 2.4vw, 1.9rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .candles {
+    transform: none !important;
+  }
+
+  .faq-q-icon {
+    transition: none;
+  }
+
+  .faq-a {
+    animation: none;
+  }
+}
+
+/* Header nav: mirrors the product's header primitive with label + caret that
+   rotates 180deg when open, and a nav-dropdown panel (solid surface, border,
+   soft shadow, fade-up entrance, uppercase micro-title). Driven by script.js. */
+.header-inner {
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-trigger,
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 13px;
+  border: none;
+  border-radius: var(--br-2);
+  background: transparent;
+  color: var(--text-2);
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: var(--fw-5);
+  line-height: 1.2; /* identical pill height for <button> and <a> items */
+  cursor: pointer;
+  transition:
+    color var(--tr-2),
+    background var(--tr-2);
+}
+
+.nav-trigger:hover,
+.nav-link:hover,
+.nav-item:hover .nav-trigger,
+.nav-item:focus-within .nav-trigger,
+.nav-item--open .nav-trigger {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+/* Invisible bridge so the pointer can cross the 10px gap into the panel */
+.nav-item::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 12px;
+}
+
+.nav-caret {
+  width: 11px;
+  height: 11px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  color: var(--text-3);
+  transition: transform 0.25s ease;
+}
+
+.nav-item:hover .nav-caret,
+.nav-item:focus-within .nav-caret,
+.nav-item--open .nav-caret {
+  transform: rotate(180deg);
+  color: var(--text-2);
+}
+
+/* Active route: the group or link for the current page keeps a filled pill. */
+.nav-trigger--current,
+.nav-link--current,
+.nav-item--current .nav-trigger {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.nav-panel-link--current {
+  background: var(--surface-2);
+}
+
+.nav-panel-link--current .nav-panel-label {
+  color: var(--accent);
+}
+
+.nav-panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  z-index: 120;
+  display: flex;
+  min-width: 264px;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px;
+  border: var(--bw-1) solid var(--border-strong);
+  border-radius: var(--br-3);
+  background: var(--surface);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.35),
+    0 1px 4px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transform: translateY(6px);
+  visibility: hidden;
+  transition:
+    opacity var(--tr-2),
+    transform var(--tr-2),
+    visibility 0s linear 0.2s;
+}
+
+/* Hover-open on pointer devices (plus keyboard focus); JS click handles touch */
+@media (hover: hover) and (pointer: fine) {
+  .nav-item:hover .nav-panel,
+  .nav-item:focus-within .nav-panel {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+    transition-delay: 0s;
+  }
+}
+
+.nav-item--open .nav-panel {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.nav-panel-title {
+  padding: 8px 12px 4px;
+  color: var(--text-3);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.nav-panel-link {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  transition: background 0.15s ease;
+}
+
+.nav-panel-link:hover {
+  background: var(--surface-2);
+}
+
+.nav-panel-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+  font-size: 0.89rem;
+  font-weight: 500;
+}
+
+.nav-panel-desc {
+  color: var(--text-3);
+  font-size: 0.75rem;
+}
+
+.nav-soon {
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: rgba(var(--accent-rgb), 0.14);
+  color: var(--accent);
+  font-size: 0.62rem;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.nav-cta {
+  margin-left: 10px;
+  min-height: 36px;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+}
+
+.nav-burger {
+  display: none;
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-2);
+  cursor: pointer;
+}
+
+.nav-burger svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+/* Burger morphs to a close icon while the mobile menu is open. */
+.nav-burger .nav-burger-x,
+.header--open .nav-burger .nav-burger-lines {
+  display: none;
+}
+
+.header--open .nav-burger .nav-burger-x {
+  display: block;
+}
+
+@media (max-width: 920px) {
+  .nav {
+    position: absolute;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    max-height: calc(100vh - var(--header-h));
+    padding: 16px var(--gutter) 28px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    overflow-y: auto;
+  }
+
+  .header--open .nav {
+    display: flex;
+  }
+
+  /* On mobile the groups are plain stacked lists, no toggling */
+  .nav-trigger {
+    pointer-events: none;
+  }
+
+  .nav-caret {
+    display: none;
+  }
+
+  .nav-panel {
+    position: static;
+    min-width: 0;
+    padding: 0 0 0 13px;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    opacity: 1;
+    transform: none;
+    visibility: visible;
+  }
+
+  .nav-panel-title {
+    display: none;
+  }
+
+  .nav-cta {
+    margin: 8px 0 0;
+  }
+
+  .nav-burger {
+    display: inline-flex;
+  }
+}
+
+/* Stub pages for routes that exist in the nav but aren't designed yet */
+.stub {
+  display: flex;
+  min-height: 55vh;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 6px;
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+
+.stub-title {
+  color: var(--text);
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.stub-copy {
+  max-width: 480px;
+  margin: 10px 0 26px;
+  color: var(--text-2);
+  font-size: 1.02rem;
+  line-height: 1.65;
+}
+
+/* Footer: half-viewport close with brand + link columns, an oversized fading
+   wordmark, then the legal baseline. */
+.footer {
+  display: flex;
+  flex: 0 0 auto;
+  min-height: 0;
+  flex-direction: column;
+  justify-content: flex-end;
+  border-top: 1px solid var(--border);
+  padding-top: clamp(48px, 6vh, 72px);
+  overflow: hidden;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: minmax(240px, 1fr) minmax(0, 1.4fr);
+  gap: clamp(40px, 6vw, 96px);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.footer-tag {
+  max-width: 300px;
+  color: var(--text-2);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.footer-cols {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-col-title {
+  margin-bottom: 4px;
+  color: var(--text-2);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.footer-col a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-2);
+  font-size: 0.88rem;
+  transition: color 0.2s ease;
+}
+
+.footer-col a:hover {
+  color: var(--text);
+}
+
+.footer-word {
+  margin: clamp(24px, 4vh, 48px) 0 clamp(56px, 9vh, 110px);
+  color: transparent;
+  background: linear-gradient(180deg, var(--lift), transparent 92%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-family: var(--font-heading);
+  font-size: clamp(6rem, 17.5vw, 17rem);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 0.78;
+  text-align: center;
+  user-select: none;
+  pointer-events: none;
+}
+
+.footer-base {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 0 22px;
+  border-top: 1px solid var(--border);
+  color: var(--text-2);
+  font-size: 0.8rem;
+}
+
+.footer-base-links {
+  display: flex;
+  gap: 22px;
+}
+
+.footer-base-links a {
+  color: var(--text-2);
+  transition: color 0.2s ease;
+}
+
+.footer-base-links a:hover {
+  color: var(--text);
+}
+
+@media (max-width: 860px) {
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .footer-cols {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 20px;
+  }
+
+  .footer-base {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}

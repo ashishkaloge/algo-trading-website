@@ -1,0 +1,109 @@
+/* Small reusable building blocks for plain HTML pages. */
+
+.container {
+  width: 100%;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+}
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--cluster-gap, var(--sp-3));
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip-path: inset(50%);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+.skip-link {
+  position: fixed;
+  top: var(--sp-3);
+  left: var(--sp-3);
+  z-index: 1000;
+  padding: var(--sp-2) var(--sp-3);
+  border: var(--bw-1) solid var(--border-strong);
+  border-radius: var(--br-2);
+  background: var(--surface);
+  color: var(--text);
+  font-weight: var(--fw-5);
+  transform: translateY(calc(-100% - var(--sp-4)));
+  transition: transform var(--tr-1);
+}
+
+.skip-link:focus {
+  outline: var(--bw-2) solid var(--focus-ring);
+  outline-offset: var(--bw-2);
+  transform: translateY(0);
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  min-height: 46px;
+  padding: 12px 24px;
+  border: var(--bw-1) solid transparent;
+  border-radius: var(--br-2);
+  font-size: 0.9rem;
+  font-weight: var(--fw-5);
+  letter-spacing: 0;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background var(--tr-2),
+    border-color var(--tr-2),
+    color var(--tr-2);
+}
+
+.button:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 var(--bw-3) var(--bg),
+    0 0 0 var(--sp-1) var(--focus-ring);
+}
+
+.button-light {
+  border-color: var(--text);
+  background: var(--text);
+  color: var(--bg);
+}
+
+.button-light:hover {
+  border-color: var(--text-2);
+  background: var(--text-2);
+}
+
+.button-dark {
+  border-color: var(--border-strong);
+  background: var(--surface);
+  color: var(--text);
+}
+
+.button-dark:hover {
+  border-color: var(--text-3);
+  background: var(--surface-2);
+}

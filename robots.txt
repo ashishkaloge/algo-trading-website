@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Disallow: /auth
+Disallow: /admin
+Disallow: /settings
+Disallow: /ai
+Disallow: /api/
+Disallow: /internal/
+Disallow: /*?*
+
+Host: tradign.com
+Sitemap: https://tradign.com/sitemap.xml

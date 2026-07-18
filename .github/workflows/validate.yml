@@ -1,0 +1,33 @@
+name: Validate public website
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Validate JavaScript syntax
+        run: |
+          node --check _landing/js/site.js
+          node --check _landing/js/script.js
+          node --check _landing/js/mockup.js
+          node --check scripts/validate-static.mjs
+
+      - name: Validate public files and links
+        run: node scripts/validate-static.mjs
